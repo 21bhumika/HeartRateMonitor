@@ -33,7 +33,8 @@ void setup(){
   Serial.println("Configuring Sensor...."); 
 
   //configures  Oximeter Settings, enables necessary alghorithms to collect data
-  int error = bioHub.configBpm(MODE_ONE); // Configuring just the BPM settings. 
+  //MODE_TWO gets more info
+  int error = bioHub.configBpm(MODE_TWO); // Configuring just the BPM settings. 
   if(!error){
     Serial.println("Sensor configured.");
   }
@@ -64,6 +65,13 @@ void loop(){
   Serial.println(body.oxygen); 
   Serial.print("Status: ");
   Serial.println(body.status); 
+
+  //MODE_TWO additions:
+  Serial.print("Extended Status: "); //checks if live sample present
+  Serial.println(body.extStatus); 
+  Serial.print("Blood Oxygen R value: ");
+  Serial.println(body.rValue); 
+
   delay(250); // Slowing it down, we don't need to break our necks here.
 }
 
