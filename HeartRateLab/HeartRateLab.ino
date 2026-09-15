@@ -1,7 +1,55 @@
-void setup() {
-  // put your setup code here, to run once:
+#include <SparkFun_Bio_Sensor_Hub_Library.h>
+#include <Wire.h>
+
+// No other Address options.
+#define DEF_ADDR 0x55
+
+// Reset pin, MFIO pin
+const int resPin = 4;
+const int mfioPin = 5;
+
+// Takes address, reset pin, and MFIO pin.
+SparkFun_Bio_Sensor_Hub bioHub(resPin, mfioPin); 
+
+/*type biodata - holds Heart rate, confidence,
+    blood oxygen levels, finger detection,
+    led data, etc. */
+bioData body;  
+
+void setup(){
+
+  Serial.begin(115200);
+
+  //enables I2C communication
+  Wire.begin();
+
+  //enables sensor communication
+  int result = bioHub.begin();
+  if (!result)
+    Serial.println("Sensor started!");
+  else
+    Serial.println("Could not communicate with the sensor!!!");
+
+  Serial.println("Configuring Sensor...."); 
+
+  //configures  Oximeter Settings, enables necessary alghorithms to collect data
+  int error = bioHub.configBpm(MODE_ONE); // Configuring just the BPM settings. 
+  if(!error){
+    Serial.println("Sensor configured.");
+  }
+  else {
+    Serial.println("Error configuring sensor.");
+    Serial.print("Error: "); 
+    Serial.println(error); 
+  }
+  // Data lags a bit behind the sensor, if you're finger is on the sensor when
+  // it's being configured this delay will give some time for the data to catch
+  // up. 
+  delay(4000); 
 
 }
+
+//get led data through: bioHub.configSensor()
 
 void loop() {
   // put your main code here, to run repeatedly:
