@@ -51,7 +51,19 @@ void setup(){
 
 //get led data through: bioHub.configSensor()
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop(){
 
+  // biometic data is collected here
+  // readBpm function saved in our "body"
+  body = bioHub.readBpm();
+  Serial.print("Heartrate: ");
+  Serial.println(body.heartRate); 
+  Serial.print("Confidence: ");
+  Serial.println(body.confidence); 
+  Serial.print("Oxygen: ");
+  Serial.println(body.oxygen); 
+  Serial.print("Status: ");
+  Serial.println(body.status); 
+  delay(250); // Slowing it down, we don't need to break our necks here.
 }
+
