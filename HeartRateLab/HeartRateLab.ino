@@ -7,7 +7,7 @@
 // Reset pin, MFIO pin
 const int resPin = 4;
 const int mfioPin = 5;
-const int buzzerPin = D12;
+const int buzzerPin = 12;
 
 // Takes address, reset pin, and MFIO pin.
 SparkFun_Bio_Sensor_Hub bioHub(resPin, mfioPin); 
@@ -68,6 +68,14 @@ void loop(){
   Serial.println(body.oxygen); 
   Serial.print("Status: ");  //checks if live sample present
   Serial.println(body.status); 
+
+  //MODE_TWO additions:
+  Serial.print("Extended Status: "); //checks if live sample present
+  Serial.println(body.extStatus); 
+  Serial.print("Blood Oxygen R value: ");
+  Serial.println(body.rValue); 
+
+  delay(250); // Slowing it down, we don't need to break our necks here.
 
   //MODE_TWO additions:
   Serial.print("Extended Status: "); //checks if live sample pressed right
