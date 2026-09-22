@@ -68,7 +68,6 @@ void loop(){
   Serial.println(body.oxygen); 
   Serial.print("Status: ");  //checks if live sample present
   Serial.println(body.status); 
-<<<<<<< HEAD
 
   //MODE_TWO additions:
   Serial.print("Extended Status: "); //checks if live sample present
@@ -78,8 +77,6 @@ void loop(){
 
   delay(250); // Slowing it down, we don't need to break our necks here.
 }
-=======
->>>>>>> origin/main
 
   //MODE_TWO additions:
   Serial.print("Extended Status: "); //checks if live sample pressed right
