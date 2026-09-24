@@ -135,7 +135,6 @@ void draw() {
 
   drawTitle();
   drawModeButtons();
-  drawCalibrationBanner();
 
   if (currentMode == 0) {
 
