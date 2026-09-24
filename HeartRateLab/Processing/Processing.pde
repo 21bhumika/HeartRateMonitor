@@ -494,6 +494,13 @@ void drawFitnessInformation() {
 
   // FITNESS ZONE BOX
 
+  if (restingHR <= 0) {
+
+    drawBaselineProgress(480, 230, 330, 45, 8, 18);
+
+    return;
+  }
+
   setZoneColor(fitnessZone);
 
   noStroke();
@@ -515,6 +522,50 @@ void drawFitnessInformation() {
     fitnessZone,
     645,
     252
+  );
+
+  textAlign(LEFT);
+}
+
+
+// ======================================================
+// BASELINE PROGRESS BAR
+// ======================================================
+
+void drawBaselineProgress(
+  float x,
+  float y,
+  float w,
+  float h,
+  float r,
+  float labelSize
+) {
+
+  float progress =
+    constrain(baselineElapsed / 30.0, 0, 1);
+
+  noStroke();
+
+  fill(140);
+  rect(x, y, w, h, r);
+
+  if (progress > 0) {
+
+    fill(80, 150, 255);
+    rect(x, y, w * progress, h, r);
+  }
+
+  fill(0);
+
+  textAlign(CENTER, CENTER);
+  textSize(labelSize);
+
+  text(
+    "WAITING  " +
+    nf(baselineElapsed, 0, 0) +
+    " / 30 s",
+    x + w / 2,
+    y + h / 2
   );
 
   textAlign(LEFT);
@@ -1021,31 +1072,38 @@ void drawStressMode() {
   }
 
 
-  noStroke();
+  if (restingHR <= 0) {
 
-  rect(
-    60,
-    320,
-    350,
-    80,
-    10
-  );
+    drawBaselineProgress(60, 320, 350, 80, 10, 30);
 
+  } else {
 
-  fill(0);
+    noStroke();
 
-  textAlign(CENTER, CENTER);
-
-  textSize(30);
-
-  text(
-    stressState,
-    235,
-    360
-  );
+    rect(
+      60,
+      320,
+      350,
+      80,
+      10
+    );
 
 
-  textAlign(LEFT);
+    fill(0);
+
+    textAlign(CENTER, CENTER);
+
+    textSize(30);
+
+    text(
+      stressState,
+      235,
+      360
+    );
+
+
+    textAlign(LEFT);
+  }
 
 
   // ====================================================
