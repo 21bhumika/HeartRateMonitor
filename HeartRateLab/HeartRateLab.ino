@@ -202,7 +202,7 @@ void loop() {
   bool validMeasurement =
       (body.status == 3) &&
       (body.extStatus == 0) &&
-      (body.confidence > 0) &&
+      (body.confidence >= 0) &&
       (body.heartRate > 0);
 
 
