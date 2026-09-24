@@ -238,42 +238,6 @@ void drawModeButtons() {
 // CALIBRATION BANNER
 // ======================================================
 
-void drawCalibrationBanner() {
-
-  // Hide once the baseline is finished
-  if (restingHR > 0) {
-    return;
-  }
-
-  textAlign(LEFT);
-  textSize(18);
-  fill(255, 190, 60);
-
-  if (lastPacketTime == 0) {
-
-    text("Waiting for sensor...", 490, 92);
-    return;
-  }
-
-  text(
-    "Calibrating... " +
-    nf(baselineElapsed, 0, 1) +
-    " / 30.0 s  (keep still)",
-    490,
-    88
-  );
-
-  // Progress bar
-  float progress = constrain(baselineElapsed / 30.0, 0, 1);
-
-  noStroke();
-
-  fill(60);
-  rect(490, 98, 300, 8, 4);
-
-  fill(255, 190, 60);
-  rect(490, 98, 300 * progress, 8, 4);
-}
 
 // ======================================================
 // MOUSE CLICK
